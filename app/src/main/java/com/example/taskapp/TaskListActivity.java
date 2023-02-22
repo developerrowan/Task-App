@@ -22,6 +22,7 @@ public class TaskListActivity extends AppCompatActivity {
     private TaskDataAccess da;
     private ArrayList<Task> allTasks;
     private Button btnAddTask;
+    private Button btnFileActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,15 @@ public class TaskListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(TaskListActivity.this, TaskDetailsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnFileActivity = findViewById(R.id.btnFileActivity);
+        btnFileActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TaskListActivity.this, FileIOActivity.class);
                 startActivity(i);
             }
         });
