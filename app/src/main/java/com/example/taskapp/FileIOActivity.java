@@ -10,6 +10,7 @@ import com.example.taskapp.models.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class FileIOActivity extends AppCompatActivity {
@@ -41,6 +42,35 @@ public class FileIOActivity extends AppCompatActivity {
 
         Task newTask = convertCSVToTask(csv);
         Log.d(TAG, "Task object: " + newTask.toString());
+
+        final String TASKS_FILE = "tasks.csv";
+
+        ArrayList<Task> tasks = new ArrayList<Task>(){{
+            add(new Task(1, "Homework", new Date(), false));
+            add(new Task(2, "Taxes", new Date(), false));
+            add(new Task(3, "Dishes", new Date(), false));
+        }};
+
+        String csvData = "";
+
+        for (Task task : tasks) {
+            csvData += convertTaskToCSV(task) + "\n";
+        }
+
+        FileHelper.writeToFile(TASKS_FILE, csvData, this);
+
+        ArrayList<Task> importedTasks = new ArrayList<Task>();
+        String[] tasksToImport = FileHelper.readFromFile(TASKS_FILE, this).split("\n");
+
+        for (String s : tasksToImport) {
+            Task task = convertCSVToTask(s);
+
+            if (task != null) {
+                importedTasks.add(task);
+            }
+        }
+
+        Log.d(TAG, "Here's the array list: " + importedTasks.toString());
     }
 
     private String convertTaskToCSV(Task task) {
