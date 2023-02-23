@@ -22,7 +22,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
     public static final String TAG = "TaskDetailsActivity";
     public static final String EXTRA_TASK_ID = "taskId";
 
-    TaskDataAccess da;
+    Taskable da;
     Task task;
 
     EditText txtDescription;

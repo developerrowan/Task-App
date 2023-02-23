@@ -7,7 +7,7 @@ import com.example.taskapp.models.Task;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TaskDataAccess {
+public class TaskDataAccess implements Taskable {
 
     private Context context;
     private static ArrayList<Task> tasks = new ArrayList<Task>(){{
@@ -35,19 +35,23 @@ public class TaskDataAccess {
         return null;
     }
 
-    public void insertTask(Task task) {
+    public Task insertTask(Task task) {
         task.setId(nextId());
         tasks.add(task);
+
+        return task;
     }
 
-    public void updateTask(Task task) {
+    public Task updateTask(Task task) {
         Task originalTask = getTaskById(task.getId());
 
-        if(originalTask == null) return;
+        if(originalTask == null) return null;
 
         originalTask.setDescription(task.getDescription());
         originalTask.setDueDate(task.getDueDate());
         originalTask.setDone(task.isDone());
+
+        return originalTask;
     }
 
     public int deleteTask(Task task) {

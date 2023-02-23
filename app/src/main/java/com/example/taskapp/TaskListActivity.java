@@ -19,7 +19,7 @@ public class TaskListActivity extends AppCompatActivity {
     public static final String TAG = "TaskListActivity";
 
     private ListView lsTasks;
-    private TaskDataAccess da;
+    private Taskable da;
     private ArrayList<Task> allTasks;
     private Button btnAddTask;
     private Button btnFileActivity;
